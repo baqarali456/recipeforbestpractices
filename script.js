@@ -115,7 +115,7 @@ function addToFavourites(i){
                 }  
         }
              
-        }
+    }
         
 }
 
