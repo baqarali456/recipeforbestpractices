@@ -13,7 +13,6 @@ const showLists = async() =>{
     let result = await response.json();
     const {categories} = result;
     data = categories.map(ele=>({...ele,favourite:false,cart:false}));
-    console.log(data);
     categoryies = ["Home",...new Set(categories.map(ele=>ele.strCategory))];
     showCategory();
     iterateItems(data);
@@ -35,7 +34,7 @@ function iterateItems(data){
     <button onclick="onAddToCart('${idCategory}')" 
     class="btn btn-primary">${displayCart?'Remove item':'Add To Cart'}</button>
     <i onclick="addToFavourites('${idCategory}')" style=color: #dc0909;"
-    style="${favourite?'color: #ff1100;':'color:#fff'}"  
+    style="color: ${favourite?'#ff1100;':'#dc0909'}"
     class="${favourite?'fa-solid fa-beat':'fa-regular'} fa-heart"></i>
   </div>
 </div>
@@ -45,8 +44,6 @@ function iterateItems(data){
 }
 
 function onAddToCart(i){
-    
-    
     if(displayCart){
         cartindex--;
             document.getElementById('carts').innerHTML = `<span>Carts ${cartindex>0?cartindex:""}</span>`;
@@ -74,7 +71,7 @@ let favindex = 0;
 function addToFavourites(i){
     if(displayFavourite){
         favouriteindex--;
-        document.getElementById('favourites').innerHTML = `<span>Favourites ${index>0?index:""}</span>`
+        document.getElementById('favourites').innerHTML = `<span>Favourites ${favouriteindex>0?favouriteindex:""}</span>`
         favouriteItems = favouriteItems.filter(ele=>ele.idCategory != i);
             if(favouriteItems.length > 0){
                 iterateItems(favouriteItems);
@@ -126,6 +123,8 @@ function addToFavourites(i){
 
 function showCart(){
     displayCart = true;
+    displayFavourite = false;
+    document.querySelector('.container').style.display = displayCart?"none":"flex"
     if(carts.length > 0){
         iterateItems(carts);
     }
@@ -136,6 +135,9 @@ function showCart(){
 
 function showFavourite(){
     displayFavourite = true;
+    displayCart = false;
+    document.querySelector('.container').style.display = displayCart?"none":"flex"
+
     if(favouriteItems.length > 0){
         iterateItems(favouriteItems);
     }
@@ -160,6 +162,9 @@ function showCategory(){
 }
 
 function clickCategory(text){
+    displayCart = false;
+        document.querySelector('.container').style.display = displayCart?"none":"flex"
+
   if(text == "Home"){
     showLists()
   }
@@ -175,5 +180,25 @@ search.addEventListener('click',(e)=>{
     let newData = data.filter(ele=>ele.strCategory.toLowerCase() == input.value);
     iterateItems(newData);
     
-})
+});
 
+let inputs = ["Title",'Image','Description'];
+let inputfields = "";
+inputs.forEach(ele=>{
+   inputfields += `
+   <div class="row mx-2 my-3 g-3 align-items-center">
+    <div class="col-auto">
+      <input type="text" id=${ele} placeholder="Enter your ${ele}" class="form-control" aria-describedby="passwordHelpInline">
+    </div>
+  </div>
+   `
+   document.getElementById('new-item').innerHTML = `${inputfields} <button onclick="additems()" class="btn mx-3 btn-primary">Add Item</button>` ;
+});
+
+
+function additems(){
+ console.log(data);
+ 
+  
+   
+}
