@@ -176,9 +176,11 @@ function clickCategory(text){
 }
 
 search.addEventListener('click',(e)=>{
-    e.preventDefault()
-    let newData = data.filter(ele=>ele.strCategory.toLowerCase() == input.value);
-    iterateItems(newData);
+    e.preventDefault();
+    if(document.getElementById('input').value){
+        let newData = data.filter(ele=>ele.strCategory.toLowerCase() == document.getElementById('input').value);
+        iterateItems(newData);
+    }
     
 });
 
@@ -188,7 +190,7 @@ inputs.forEach(ele=>{
    inputfields += `
    <div class="row mx-2 my-3 g-3 align-items-center">
     <div class="col-auto">
-      <input type="text" id=${ele} placeholder="Enter your ${ele}" class="form-control" aria-describedby="passwordHelpInline">
+      <input type="text" id=${ele} placeholder="Enter your ${ele}" class="form-control">
     </div>
   </div>
    `
@@ -197,8 +199,17 @@ inputs.forEach(ele=>{
 
 
 function additems(){
- console.log(data);
- 
-  
-   
+    console.log(data);
+    
+    let allids = data.map(ele=>parseInt(ele.idCategory));
+     let id = allids[allids.length - 1];
+      id++;
+      if(Title.value && Image.value && Description.value){
+          data.push({idCategory:id.toString(),strCategory:Title.value,strCategoryThumb:Image.value,strCategoryDescription:Description.value});
+       iterateItems(data);
+       Title.value = "";
+       Image.value = "";
+       Description.value = "";
+
+      }
 }
