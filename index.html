@@ -30,30 +30,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="category cursor-pointer nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="category cursor-pointer nav-link">men's clothing</a>
-            </li>
-            <li class="nav-item">
-              <a class="category cursor-pointer nav-link">jewelery</a>
-            </li>
-            <li class="nav-item">
-              <a class="category cursor-pointer nav-link">electronics</li> 
-            <li class="nav-item">
-              <a class="category cursor-pointer nav-link">women's clothing</a>
-            </li>
+          <ul id="allcategory" class="navbar-nav">
+            
+            
           </ul>
         </div>
 
-        <button id="carts" onclick="showCart()" class="mx-2 btn btn-primary">Carts
-        <button id="favourites" onclick="showFavourite()" class="mx-2 btn btn-primary">
+        <button id="carts" onclick="showCart()" class="mx-1 btn btn-primary">Carts
+        <button id="favourites" onclick="showFavourite()" class="mx-1 btn btn-primary">
            Favourites </button>
       </div>
       
     </nav>
+    <div class="container">
+      <form class="d-flex my-2" role="search">
+        <input id="input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="search"  class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
     <div
       id="cards-lists"
       class="container my-3 d-flex flex-row flex-wrap"
